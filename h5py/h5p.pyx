@@ -918,6 +918,33 @@ cdef class PropFAID(PropInstanceID):
         H5Pget_fapl_core(self.id, &increment, &backing_store)
         return (increment, <bint>(backing_store))
 
+    @with_phil
+    def set_fapl_direct(self, size_t alignment=512, size_t block_size=4*1024, size_t cbuf_size=4*1024):
+        """(UINT alignment=512, UINT block_size=4k, UINT cbufsize=4k)
+
+        Use the h5fd.DIRECT file driver.
+
+        alignment specifies the required alignment boundary in memory.
+        block_size specifies the file system block size. A value of 0 (zero) means to use HDF5 Library’s default value of 4KB.
+        cbuf_size specifies the copy buffer size.
+        """
+        H5Pset_fapl_direct(self.id, alignment, block_size, cbuf_size)
+
+    @with_phil
+    def get_fapl_direct(self):
+        """() => TUPLE direct_settings
+
+        Determine settings for the h5fd.DIRECT file driver.
+        Tuple elements are:
+        0. alignment specifies the required alignment boundary in memory.
+        1. block_size specifies the file system block size. A value of 0 (zero) means to use HDF5 Library’s default value of 4KB.
+        2. cbuf_size specifies the copy buffer size.
+        """
+        cdef size_t alignment
+        cdef size_t block_size
+        cdef size_t cbuf_size
+        H5Pget_fapl_direct(self.id, &alignment, &block_size, &cbuf_size)
+        return (alignment, block_size, cbuf_size)
 
     @with_phil
     def set_fapl_family(self, hsize_t memb_size=2147483647, PropID memb_fapl=None):

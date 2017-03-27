@@ -139,6 +139,7 @@ cdef extern from "hdf5.h":
   # Hopefully Cython won't have a problem with this.
   # Thankfully they are defined but -1 if unavailable
   hid_t H5FD_CORE
+  hid_t H5FD_DIRECT
   hid_t H5FD_FAMILY
 # hid_t H5FD_GASS  not in 1.8.X
   hid_t H5FD_LOG
