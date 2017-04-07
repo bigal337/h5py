@@ -65,6 +65,8 @@ def make_fapl(driver, libver, **kwds):
         plist.set_fapl_stdio(**kwds)
     elif driver == 'core':
         plist.set_fapl_core(**kwds)
+    elif driver == 'direct':
+        plist.set_fapl_direct(**kwds)
     elif driver == 'family':
         plist.set_fapl_family(memb_fapl=plist.copy(), **kwds)
     elif driver == 'mpio':
@@ -163,9 +165,9 @@ class File(Group):
     def driver(self):
         """Low-level HDF5 file driver used to open file"""
         drivers = {h5fd.SEC2: 'sec2', h5fd.STDIO: 'stdio',
-                   h5fd.CORE: 'core', h5fd.FAMILY: 'family',
-                   h5fd.WINDOWS: 'windows', h5fd.MPIO: 'mpio',
-                   h5fd.MPIPOSIX: 'mpiposix'}
+                   h5fd.CORE: 'core', h5fd.DIRECT: 'direct',
+                   h5fd.FAMILY: 'family', h5fd.WINDOWS: 'windows',
+                   h5fd.MPIO: 'mpio', h5fd.MPIPOSIX: 'mpiposix'}
         return drivers.get(self.fid.get_access_plist().get_driver(), 'unknown')
 
     @property
@@ -244,7 +246,7 @@ class File(Group):
             a        Read/write if exists, create otherwise (default)
         driver
             Name of the driver to use.  Legal values are None (default,
-            recommended), 'core', 'sec2', 'stdio', 'mpio'.
+            recommended), 'core', 'direct',  'sec2', 'stdio', 'mpio'.
         libver
             Library version bounds.  Currently only the strings 'earliest'
             and 'latest' are defined.

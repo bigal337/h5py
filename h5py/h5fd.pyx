@@ -33,6 +33,7 @@ MPIO_COLLECTIVE = H5FD_MPIO_COLLECTIVE
 # === Driver types ============================================================
 
 CORE = H5FD_CORE
+DIRECT = H5FD_DIRECT
 FAMILY = H5FD_FAMILY
 LOG = H5FD_LOG
 MPIO = H5FD_MPIO
