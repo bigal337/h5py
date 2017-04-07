@@ -1023,6 +1023,7 @@ cdef class PropFAID(PropInstanceID):
         listed in module h5fd; they are:
 
         - h5fd.CORE
+        - h5fd.DIRECT
         - h5fd.FAMILY
         - h5fd.LOG
         - h5fd.MPIO
