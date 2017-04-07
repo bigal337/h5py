@@ -10,7 +10,7 @@ h5py/*.dll
 *.hdf5
 *.pkl
 h5py/defs.*
-build/
+
 *.pyc
 dist/
 MANIFEST
